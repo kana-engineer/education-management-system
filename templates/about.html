@@ -1,0 +1,2616 @@
+{% extends 'base.html' %}
+{% load static i18n_extra %}
+
+{% block title %}
+    K-Land Education Center - Образование в Корее
+{% endblock %}
+
+{% block body %}
+
+<!-- Hero секция с видео фоном -->
+<section class="hero-section">
+    <div class="hero-video-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-pulse">🎓 {% t "K-Land Education Center" %}</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-gradient">{% t "Образование в Корее" %}</span>
+                <br>{% t "начинается здесь" %}
+            </h1>
+            <p class="hero-subtitle">
+                {% t "С 2018 года открываем мир возможностей для кыргызской молодежи. Более 350 студентов уже осуществили свою мечту!" %}
+            </p>
+            <div class="hero-actions">
+                <a href="{% url 'main:courses' %}" class="btn btn-outline-light">
+                    <i class="bi bi-rocket me-2"></i>{% t "Начать обучение" %}
+                </a>
+            </div>
+        </div>
+        <div class="hero-stats-container">
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">👨‍🎓</div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="{{ students_count }}">{{ students_count }}+</div>
+                        <div class="stat-label">{% t "Студентов" %}</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🏛️</div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="15">0+</div>
+                        <div class="stat-label">{% t "Университетов" %}</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="98">0%</div>
+                        <div class="stat-label">{% t "Успеха" %}</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-count="8">0+</div>
+                        <div class="stat-label">{% t "Лет опыта" %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества -->
+<section class="benefits-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{% t "Почему выбирают K-Land?" %}</h2>
+            <p class="section-subtitle">{% t "Наши ключевые преимущества для вашего успеха" %}</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <h3>{% t "98% успешных поступлений" %}</h3>
+                <p>{% t "Высокий процент зачисления в корейские университеты" %}</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+                <h3>{% t "Носители языка" %}</h3>
+                <p>{% t "Опытные преподаватели и опытные методисты" %}</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+                <h3>{% t "Поддержка 24/7" %}</h3>
+                <p>{% t "Помощь на всех этапах: от поступления до выпуска" %}</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="bi bi-award"></i>
+                </div>
+                <h3>{% t "Сертификаты" %}</h3>
+                <p>{% t "Международно признанные сертификаты по окончании" %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Быстрый доступ к курсам -->
+<section class="courses-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{% t "Выберите свой курс" %}</h2>
+            <p class="section-subtitle">{% t "Начните путь к образованию в Корее прямо сейчас" %}</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-icon">
+                        <i class="bi bi-chat-square-text"></i>
+                    </div>
+                    <span class="course-level">TOPIK 1-6</span>
+                </div>
+                <h3>{% t "Корейский язык" %}</h3>
+                <p>{% t "Полный курс подготовки с опытными преподавателями" %}</p>
+                <ul class="course-features">
+                    <li><i class="bi bi-check-lg"></i> {% t "Подготовка к TOPIK" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Разговорная практика" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Современные методики" %}</li>
+                </ul>
+                <div class="course-footer">
+                    
+                    <a href="{% url 'main:courses' %}" class="course-btn">
+                        {% t "Подробнее" %} <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card featured">
+                <div class="course-badge">{% t "Популярный" %}</div>
+                <div class="course-header">
+                    <div class="course-icon">
+                        <i class="bi bi-globe2"></i>
+                    </div>
+                    <span class="course-level">IELTS 7.0+</span>
+                </div>
+                <h3>{% t "Английский язык" %}</h3>
+                <p>{% t "Подготовка к международным экзаменам для поступления" %}</p>
+                <ul class="course-features">
+                    <li><i class="bi bi-check-lg"></i> {% t "IELTS/TOEFL подготовка" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Академический английский" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Сертификаты международного образца" %}</li>
+                </ul>
+                <div class="course-footer">
+                    <a href="{% url 'main:courses' %}" class="course-btn">
+                        {% t "Подробнее" %} <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-icon">
+                        <i class="bi bi-mortarboard"></i>
+                    </div>
+                    <span class="course-level">{% t "Бакалавр/Магистр" %}</span>
+                </div>
+                <h3>{% t "Поступление в ВУЗ" %}</h3>
+                <p>{% t "Полное сопровождение при поступлении в Корею" %}</p>
+                <ul class="course-features">
+                    <li><i class="bi bi-check-lg"></i> {% t "14+ университетов-партнеров" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Оформление документов" %}</li>
+                    <li><i class="bi bi-check-lg"></i> {% t "Визовая поддержка" %}</li>
+                </ul>
+                <div class="course-footer">
+                    <span class="course-price">{% t "Индивидуально" %}</span>
+                    <a href="{% url 'main:courses' %}" class="course-btn">
+                        {% t "Подробнее" %} <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Университеты-партнеры -->
+<section class="universities-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{% t "Университеты-партнеры" %}</h2>
+            <p class="section-subtitle">{% t "Прямое сотрудничество с ведущими вузами Кореи" %}</p>
+        </div>
+        
+        <div class="universities-table-container">
+            <div class="universities-table">
+                {% for university in universities %}
+                <div class="university-item">
+                    <div class="university-number">{{ loop.index }}</div>
+                    <div class="university-name">
+                        <i class="bi bi-building me-2"></i>
+                        {{ university }}
+                    </div>
+                    <div class="university-status">
+                        <span class="status-badge active">
+                            <i class="bi bi-check-circle me-1"></i> {% t "Активно" %}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="universities-stats">
+            <div class="stat-item">
+                <div class="stat-icon">🎓</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ universities|length }}+</div>
+                    <div class="stat-label">{% t "университетов" %}</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">{% t "специальностей" %}</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🌟</div>
+                <div class="stat-content">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">{% t "успешных поступлений" %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Галерея успешных студентов -->
+<section class="gallery-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{% t "Истории успеха" %}</h2>
+            <p class="section-subtitle">{% t "Наши студенты уже учатся в Корее" %}</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <div class="gallery-image">
+                    <img src="{% static 'images/WhatsApp Image 2026-02-04 at 13.00.24.jpeg' %}">
+                    <div class="university-badge">YEUNGNAM UNIVERSITY </div>
+                </div>
+                <div class="gallery-content">
+                    <h4>{% t "Пазыл Уулу Байыш" %}</h4>
+                    <p class="university">{% t "YEUNGNAM UNIVERSITY" %}</p>
+                    <p class="story">{% t "Студент учится на третьем курсе, изучает термодинамику, механику и проектирование машин. Активно участвует в лабораторных экспериментах и практических инженерных проектах." %}</p>
+                    <div class="achievement">
+                        <i class="bi bi-award"></i>
+                        <span>{% t "TOPIK 5" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-card">
+                <div class="gallery-image">
+                    <img src="{% static 'images/IMG_6845.JPG.jpeg' %}">
+                    <div class="university-badge">University Kyungil</div>
+                </div>
+                <div class="gallery-content">
+                    <h4>{% t "Жоодарбек уулу Барсбек" %}</h4>
+                    <p class="university">{% t "University Kyungil" %}</p>
+                    <p class="story">{% t "Барсбек учится на втором курсе, изучает основные инженерные дисциплины, включая механику, электронику и техническое проектирование. Активно участвует в лабораторных работах и практических проектах для получения практического опыта." %}</p>
+                    <div class="achievement">
+                        <i class="bi bi-star"></i>
+                        <span>{% t "TOPIK 4" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-card">
+                <div class="gallery-image">
+                    <img src="{% static 'images/WhatsApp Image 2026-02-04 at 19.27.24.jpeg' %}">
+                    <div class="university-badge">uni PAI CHAI</div>
+                </div>
+                <div class="gallery-content">
+                    <h4>{% t "Абдыкаарова Медина" %}</h4>
+                    <p class="university">{% t "University PAI CHAI" %}</p>
+                    <p class="story">{% t "Медина учится на втором курсе, изучает принципы управления, организационное поведение и бизнес-администрирование. Участвует в групповых проектах и практических заданиях для развития управленческих навыков." %}</p>
+                    <div class="achievement">
+                        <i class="bi bi-briefcase"></i>
+                        <span>{% t "TOPIK 5" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-card">
+                <div class="gallery-image">
+                    <img src="{% static 'images/WhatsApp Image 2026-02-04 at 19.35.39.jpeg' %}">
+                    <div class="university-badge">Kyungil University</div>
+                </div>
+                <div class="gallery-content">
+                    <h4>{% t "Батирова Гулжамал" %}</h4>
+                    <p class="university">{% t "Kyungil University" %}</p>
+                    <p class="story">{% t "Гулжамал учится на третьем курсе, специализируется на глобальных бизнес-стратегиях, международном маркетинге и менеджменте. Активно участвует в групповых проектах и кейс-стадиях, чтобы применять теоретические знания на практике." %}</p>
+                    <div class="achievement">
+                        <i class="bi bi-trophy"></i>
+                        <span>{% t "TOPIK 5" %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Процесс обучения -->
+<section class="process-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{% t "Как мы работаем" %}</h2>
+            <p class="section-subtitle">{% t "4 простых шага к вашему образованию в Корее" %}</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-track"></div>
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-icon">🎯</div>
+                    <h3>{% t "Консультация" %}</h3>
+                    <p>{% t "Бесплатная консультация и подбор программы обучения" %}</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-icon">📚</div>
+                    <h3>{% t "Языковая подготовка" %}</h3>
+                    <p>{% t "Интенсивные курсы корейского или английского языка" %}</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-icon">📄</div>
+                    <h3>{% t "Поступление" %}</h3>
+                    <p>{% t "Помощь с документами и зачислением в университет" %}</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-icon">🌟</div>
+                    <h3>{% t "Поддержка в Корее" %}</h3>
+                    <p>{% t "Кураторство и поддержка на протяжении всего обучения" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Основатель центра -->
+<section class="founder-section">
+    <div class="container">
+        <div class="founder-card">
+            <!-- Фото в отдельном блоке с фоновым градиентом -->
+            <div class="founder-image-container">
+                <div class="image-wrapper">
+                    <img src="{% static 'images/WhatsApp Image 2025-11-19 at 19.12.42.jpeg' %}" 
+                         alt="Манишов Алтынбек Джанишбекович"
+                         class="founder-portrait">
+                    <div class="image-frame"></div>
+                </div>
+                <div class="founder-badge">
+                    <span class="badge-dot"></span>
+                    {% t "Основатель" %}
+                </div>
+            </div>
+
+            <!-- Контент -->
+            <div class="founder-content">
+                <div class="founder-header">
+                    <span class="section-label">{% t "Руководитель центра" %}</span>
+                    <h1 class="founder-name">{% t "Манишов Алтынбек Джанишбекович" %}</h1>
+                    <p class="founder-title">{% t "Генеральный директор учебного центра ”К-ЛЭНД”" %}</p>
+                </div>
+
+                <!-- Цитата с акцентной линией -->
+                <div class="quote-block">
+                    <div class="quote-line"></div>
+                    <blockquote class="founder-quote">
+                        {% t "Образование в Корее — это не просто учёба, это путешествие в мир технологий, культуры и международных возможностей" %}
+                    </blockquote>
+                </div>
+
+                <!-- Основной текст с отступами -->
+                <div class="founder-description">
+                    <p>{% t "За 6 лет работы в сфере международного образования помог более 350 студентам из Кыргызстана поступить в ведущие университеты Южной Кореи." %}</p>
+                    <p>{% t "Специализируется на комплексной подготовке: от языковых курсов до культурной адаптации и карьерного консультирования." %}</p>
+                </div>
+
+                <!-- Статистика в виде метрик -->
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">{{ students_count }}+</div>
+                        <div class="metric-label">{% t "Студентов" %}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">15+</div>
+                        <div class="metric-label">{% t "Университетов" %}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">8 лет</div>
+                        <div class="metric-label">{% t "Опыта" %}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">98%</div>
+                        <div class="metric-label">{% t "Успеха" %}</div>
+                    </div>
+                </div>
+
+                <!-- Образование компактно -->
+                <div class="education-block">
+                    <h3>{% t "Квалификации" %}</h3>
+                    <ul class="education-list">
+                        <li>{% t "Магистр международного образования" %}</li>
+                        <li>{% t "Сертифицированный преподаватель корейского языка" %}</li>
+                        <li>{% t "Опыт обучения и стажировок в Корее" %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Команда преподавателей -->
+<section class="team-section">
+    <div class="container">
+        <div class="section-intro">
+            <span class="section-label">{% t "Команда специалистов" %}</span>
+            <h2 class="section-title">{% t "Наши преподаватели" %}</h2>
+            <p class="section-subtitle">{% t "Профессионалы с международным опытом" %}</p>
+        </div>
+
+        <div class="team-grid">
+            {% for teacher in teachers %}
+            <article class="teacher-card">
+                <!-- Фото с метками -->
+                <div class="teacher-photo">
+                    <div class="photo-wrapper">
+                        {% if teacher.photo %}
+                            <img src="{{ teacher.photo|media_url }}" 
+                                 alt="{{ teacher.name }}"
+                                 class="teacher-image"
+                                 loading="lazy">
+                        {% else %}
+                            {% if 'корейск' in teacher.role|lower %}
+                                <img src="{% static 'images/230721-teachers-deals-kb-2x1.webp' %}" 
+                                     alt="{{ teacher.name }}"
+                                     class="teacher-image"
+                                     loading="lazy">
+                            {% elif 'английск' in teacher.role|lower %}
+                                <img src="{% static 'images/b7c432a3f534a5e3c17afeb6ee1154d5.jpg' %}" 
+                                     alt="{{ teacher.name }}"
+                                     class="teacher-image"
+                                     loading="lazy">
+                            {% elif 'координатор' in teacher.role|lower %}
+                                <img src="{% static 'images/i (1).webp' %}" 
+                                     alt="{{ teacher.name }}"
+                                     class="teacher-image"
+                                     loading="lazy">
+                            {% else %}
+                                <img src="{% static 'images/default-teacher.jpg' %}" 
+                                     alt="{{ teacher.name }}"
+                                     class="teacher-image"
+                                     loading="lazy">
+                            {% endif %}
+                        {% endif %}
+                        
+                        <!-- Флажок страны -->
+                        <div class="country-indicator">
+                            {% if 'корейск' in teacher.role|lower %}
+                                <span class="flag">KR</span>
+                            {% elif 'английск' in teacher.role|lower %}
+                                <span class="flag">EN</span>
+                            {% elif 'координатор' in teacher.role|lower %}
+                                <span class="flag">KG</span>
+                            {% else %}
+                                <span class="flag">INT</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Опыт (если есть) -->
+                    {% if teacher.experience %}
+                    <div class="experience">
+                        <svg class="star-icon" viewBox="0 0 24 24" width="14" height="14">
+                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        {{ teacher.experience }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Информация -->
+                <div class="teacher-info">
+                    <div class="teacher-header">
+                        <h3 class="teacher-name">{{ teacher.name }}</h3>
+                        <p class="teacher-position">{{ teacher.role }}</p>
+                    </div>
+
+                    <!-- Специализация -->
+                    <div class="specialization">
+                        {% if 'корейск' in teacher.role|lower %}
+                            <span class="subject">{% t "Корейский язык" %}</span>
+                        {% elif 'английск' in teacher.role|lower %}
+                            <span class="subject">{% t "Английский язык" %}</span>
+                        {% elif 'координатор' in teacher.role|lower %}
+                            <span class="subject">{% t "Поступление в Корею" %}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Короткое описание -->
+                    <p class="teacher-bio">
+                        {% if teacher.role %}{{ teacher.role|truncatechars:80 }}{% else %}{% t "Опытный специалист с международной практикой" %}{% endif %}
+                    </p>
+
+                    <!-- Навыки -->
+                    {% if teacher.get_tags_list %}
+                    <div class="skills">
+                        {% for tag in teacher.get_tags_list|slice:":2" %}
+                        <span class="skill">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Статистика -->
+                    <div class="stats">
+                        <div class="student-count">
+                            <svg class="student-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                            </svg>
+                            50+ {% t "студентов" %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Призыв к действию -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2>{% t "Начните свой путь в Корее!" %}</h2>
+                <p>{% t "Получите бесплатную консультацию и подбор программы" %}</p>
+                <div class="cta-actions">
+                    <a href="https://wa.me/996775469111?text=Здравствуйте!%20Хочу%20записаться%20на%20курсы." class="btn btn-whatsapp">
+                        <i class="bi bi-whatsapp"></i> {% t "WhatsApp" %}
+                    </a>
+                    <a href="tel:+996775469111" class="btn btn-phone">
+                        <i class="bi bi-telephone"></i> {% t "Позвонить" %}
+                    </a>
+                    <a href="{% url 'main:courses' %}" class="btn btn-primary">
+                        <i class="bi bi-calendar-check"></i> {% t "Записаться" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+// Простая анимация появления при скролле
+document.addEventListener('DOMContentLoaded', function() {
+    const founderCard = document.querySelector('.founder-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    if (founderCard) {
+        observer.observe(founderCard);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.teacher-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('in-view');
+                }, index * 50);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    cards.forEach(card => observer.observe(card));
+});
+
+</script>
+
+<style>
+/* CSS переменные */
+/* Команда - Компактный дизайн */
+.team-section {
+    padding: 80px 0;
+    background: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Заголовок */
+.section-intro {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Сетка преподавателей */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* Карточка преподавателя */
+.teacher-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    transition: all 0.2s ease;
+    height: 100%;
+}
+
+.teacher-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Фото */
+.teacher-photo {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.photo-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px;
+}
+
+.teacher-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #f3f4f6;
+    transition: border-color 0.3s ease;
+}
+
+.teacher-card:hover .teacher-image {
+    border-color: #2563eb;
+}
+
+.country-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #374151;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+}
+
+.experience {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.star-icon {
+    color: #f59e0b;
+    fill: currentColor;
+}
+
+/* Информация */
+.teacher-info {
+    text-align: center;
+}
+
+.teacher-header {
+    margin-bottom: 12px;
+}
+
+.teacher-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.teacher-position {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Специализация */
+.specialization {
+    margin-bottom: 12px;
+}
+
+.subject {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Био */
+.teacher-bio {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #4b5563;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Навыки */
+.skills {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.skill {
+    font-size: 0.8rem;
+    color: #6b7280;
+    padding: 4px 10px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #f3f4f6;
+}
+
+/* Статистика */
+.stats {
+    border-top: 1px solid #f3f4f6;
+    padding-top: 16px;
+}
+
+.student-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #374151;
+    font-weight: 500;
+}
+
+.student-icon {
+    color: #2563eb;
+}
+
+/* Анимация появления */
+.teacher-card {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.teacher-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Скрипт для анимации */
+
+/* Основатель - Мой любимый стиль */
+.founder-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%);
+    position: relative;
+}
+
+.founder-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #e5e7eb 20%, 
+        #e5e7eb 80%, 
+        transparent 100%);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.founder-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 60px;
+    align-items: start;
+    position: relative;
+}
+
+@media (max-width: 900px) {
+    .founder-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+/* Левая колонка - фото */
+.founder-image-container {
+    position: relative;
+    padding-top: 20px;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 120%;
+}
+
+.founder-portrait {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    filter: grayscale(10%) contrast(105%);
+    transition: all 0.4s ease;
+}
+
+.founder-portrait:hover {
+    filter: grayscale(0%) contrast(110%);
+}
+
+.image-frame {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: 15px;
+    bottom: 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.founder-portrait:hover ~ .image-frame {
+    top: -10px;
+    left: -10px;
+    right: 10px;
+    bottom: 10px;
+    border-color: #2563eb;
+}
+
+.founder-badge {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #f3f4f6;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #2563eb;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Правая колонка - контент */
+.founder-content {
+    padding-top: 10px;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.founder-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+    .founder-name {
+        font-size: 2rem;
+    }
+}
+
+.founder-title {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/* Цитата */
+.quote-block {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.quote-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, #2563eb, #7c3aed);
+    border-radius: 2px;
+}
+
+.founder-quote {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #374151;
+    font-style: normal;
+    padding-left: 24px;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Описание */
+.founder-description {
+    margin-bottom: 50px;
+}
+
+.founder-description p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.founder-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Метрики */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+    padding: 30px 0;
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metric {
+    text-align: center;
+    padding: 15px;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2563eb;
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* Образование */
+.education-block {
+    padding-top: 20px;
+}
+
+.education-block h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+}
+
+.education-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.education-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.education-list li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: #2563eb;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.education-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Минимальные анимации при скролле */
+.founder-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.founder-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Университеты-партнеры - Компактная табличка */
+.universities-section {
+    background: var(--light);
+}
+
+.universities-table-container {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+}
+
+.universities-table {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.university-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.university-item:last-child {
+    border-bottom: none;
+}
+
+.university-item:hover {
+    background: var(--light-gray);
+}
+
+.university-number {
+    width: 32px;
+    height: 32px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.university-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+}
+
+.university-name i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.status-badge.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.active i {
+    color: #10b981;
+}
+
+/* Статистика университетов */
+.universities-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    background: var(--white);
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.universities-stats .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.universities-stats .stat-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--light-gray);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.universities-stats .stat-content {
+    flex: 1;
+}
+
+.universities-stats .stat-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.universities-stats .stat-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 500;
+}
+
+/* Адаптивность для компактной таблички */
+@media (max-width: 768px) {
+    .university-item {
+        grid-template-columns: auto 1fr;
+        gap: 15px;
+        padding: 12px 20px;
+    }
+    
+    .university-status {
+        grid-column: 1 / -1;
+        margin-left: 47px; /* Отступ под номером */
+    }
+    
+    .universities-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .university-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .university-number {
+        margin: 0 auto;
+    }
+    
+    .university-name {
+        justify-content: center;
+    }
+    
+    .university-status {
+        margin-left: 0;
+        grid-column: 1;
+    }
+    
+    .universities-table {
+        max-height: 500px;
+    }
+}
+
+/* Стили для скроллбара */
+.universities-table::-webkit-scrollbar {
+    width: 6px;
+}
+
+.universities-table::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+.universities-table::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: var(--radius-full);
+}
+
+.universities-table::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+:root {
+    /* Основные цвета */
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary: #8b5cf6;
+    --accent: #f59e0b;
+    --accent-dark: #d97706;
+    --success: #10b981;
+    --danger: #ef4444;
+    
+    /* Нейтральные цвета */
+    --light: #f8fafc;
+    --light-gray: #f1f5f9;
+    --gray: #64748b;
+    --dark: #1e293b;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    
+    /* Тени */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 6px 12px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Градиенты */
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #fbbf24 100%);
+    --gradient-dark: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
+    --gradient-card: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    
+    /* Скругления */
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    /* Анимации */
+    --transition: all 0.3s ease;
+}
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Секции заголовки */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+}
+
+/* Hero секция */
+.hero-section {
+    position: relative;
+    background: var(--gradient-primary);
+    color: var(--white);
+    padding: 100px 0 60px;
+    overflow: hidden;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    margin-bottom: 24px;
+}
+
+.badge-pulse {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--dark);
+}
+
+.btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px rgba(245, 158, 11, 0.5); }
+    to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
+}
+
+.btn-outline-light {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.btn-outline-light:hover {
+    background: var(--white);
+    color: var(--dark);
+    transform: translateY(-2px);
+}
+
+.hero-stats-container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .hero-stats {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+}
+
+/* Преимущества */
+.benefits-section {
+    background: var(--light);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.benefit-card {
+    background: var(--white);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.benefit-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.benefit-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+/* Курсы */
+.courses-section {
+    background: var(--white);
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.course-card.featured {
+    border: 2px solid var(--accent);
+    box-shadow: var(--shadow-xl);
+}
+
+.course-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--dark);
+    padding: 6px 20px;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.course-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.course-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.course-level {
+    background: var(--light-gray);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.course-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.course-card > p {
+    color: var(--gray);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.course-features {
+    list-style: none;
+    margin-bottom: 24px;
+}
+
+.course-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.course-features i {
+    color: var(--success);
+}
+
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.course-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.course-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.course-btn:hover {
+    background: var(--primary-dark);
+    transform: translateX(4px);
+}
+
+/* Университеты-партнеры */
+.universities-section {
+    background: var(--light);
+}
+
+.universities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.university-card {
+    background: var(--white);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+    position: relative;
+}
+
+.university-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.university-rank {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--accent);
+    color: var(--dark);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.university-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--light-gray);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.university-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.university-initials {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.university-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.university-location {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.university-programs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.program-badge {
+    background: var(--light);
+    color: var(--dark);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.university-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.specialty-tag {
+    background: var(--light-gray);
+    color: var(--gray);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Галерея */
+.gallery-section {
+    background: var(--white);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.gallery-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-image img {
+    transform: scale(1.05);
+}
+
+.university-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(37, 99, 235, 0.9);
+    color: var(--white);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+.gallery-content {
+    padding: 24px;
+}
+
+.gallery-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--dark);
+}
+
+.university {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.story {
+    color: var(--gray);
+    margin-bottom: 16px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Процесс */
+.process-section {
+    background: var(--light);
+}
+
+.process-steps {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-track {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 1;
+}
+
+.process-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background: var(--white);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+    background: var(--light);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.step-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.step-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.step-content p {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .process-track {
+        display: none;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .step-content {
+        width: 100%;
+    }
+}
+
+/* Основатель */
+.founder-section {
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.founder-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    z-index: 1;
+}
+
+.founder-profile {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .founder-profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+}
+
+.founder-image {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid var(--white);
+    box-shadow: var(--shadow-xl);
+}
+
+.founder-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.founder-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-accent);
+    color: var(--dark);
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    box-shadow: var(--shadow-lg);
+}
+
+.founder-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.founder-quote {
+    font-size: 1.25rem;
+    color: var(--primary);
+    font-style: italic;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.6;
+}
+
+.founder-about {
+    margin-bottom: 30px;
+}
+
+.founder-about p {
+    margin-bottom: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.founder-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.founder-stat {
+    text-align: center;
+    background: var(--light);
+    padding: 20px;
+    border-radius: var(--radius);
+}
+
+.founder-stat .stat-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.founder-stat .stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.founder-education h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.founder-education ul {
+    list-style: none;
+}
+
+.founder-education li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+.founder-education li i {
+    color: var(--accent);
+}
+
+/* Команда */
+.team-section {
+    background: var(--light);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.team-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.team-card-inner {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.member-photo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--primary-light);
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-country {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    border: 2px solid var(--primary);
+}
+
+.member-experience {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--accent);
+    color: var(--dark);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-info h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--dark);
+    text-align: center;
+}
+
+.member-role {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.member-expertise {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.expertise-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--light);
+    color: var(--dark);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.expertise-item i {
+    color: var(--accent);
+}
+
+.member-description {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.member-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.member-tags .tag {
+    background: var(--light-gray);
+    color: var(--gray);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.member-achievements {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.achievement {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.achievement i {
+    color: var(--accent);
+}
+
+/* CTA секция */
+.cta-section {
+    background: var(--gradient-dark);
+    color: var(--white);
+}
+
+.cta-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: 60px;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: var(--white);
+}
+
+.btn-whatsapp:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}
+
+.btn-phone {
+    background: var(--success);
+    color: var(--white);
+}
+
+.btn-phone:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .cta-card {
+        padding: 40px 20px;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-actions .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+</style>
+
+<script>
+// Анимация счетчиков
+document.addEventListener('DOMContentLoaded', function() {
+    // Анимация счетчиков в статистике
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const suffix = counter.textContent.includes('+') ? '+' : 
+                      counter.textContent.includes('%') ? '%' : '';
+        
+        let current = 0;
+        const increment = target / 50;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                if (current > target) current = target;
+                
+                counter.textContent = Math.floor(current) + suffix;
+                setTimeout(updateCounter, 30);
+            }
+        };
+        
+        // Запускаем при появлении в viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(counter);
+    });
+
+    // Анимация появления элементов при скролле
+    const animatedElements = document.querySelectorAll(
+        '.course-card, .benefit-card, .gallery-card, .team-card, .process-step, .university-card'
+    );
+    
+    const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        fadeInObserver.observe(el);
+    });
+
+    // Плавный скролл для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Анимация ховера для карточек
+    const interactiveCards = document.querySelectorAll('.course-card, .university-card, .team-card');
+    interactiveCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            if (!document.querySelector(':hover')?.closest('.course-card, .university-card, .team-card')) {
+                card.style.transform = 'translateY(0)';
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

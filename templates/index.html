@@ -1,0 +1,920 @@
+{% extends 'base.html' %}
+{% load static i18n_extra %}
+
+{% block title %}
+    K-Land Center - Образование в Корее
+{% endblock %}
+
+{% block body %}
+
+<!-- Hero секция -->
+<section class="main-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>{% t "K-Land training Center" %}</span>
+            </div>
+            <h1 class="hero-title">
+                {% t "Образование в" %} 
+                <span class="title-highlight">{% t "Корее" %}</span> 
+                {% t "- твой билет в будущее" %}
+            </h1>
+            <p class="hero-subtitle">
+                {% t "С 2018 года мы открываем двери в ведущие университеты Южной Кореи. Более 350 студентов уже осуществили свою мечту с нами!" %}
+            </p>
+            <div class="hero-actions">
+                <a href="{% url 'main:courses' %}" class="btn btn-primary">
+                    <i class="bi bi-rocket me-2"></i>{% t "Начать обучение" %}
+                </a>
+                <a href="{% url 'main:about' %}" class="btn btn-secondary">
+                    <i class="bi bi-play-circle me-2"></i>{% t "Узнать больше" %}
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">{{ students_count }}+</div>
+                    <div class="stat-label">{% t "Студентов" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{% t "98%" %}</div>
+                    <div class="stat-label">{% t "Успеха" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{% t "15+" %}</div>
+                    <div class="stat-label">{% t "Университетов" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{% t "8+" %}</div>
+                    <div class="stat-label">{% t "Лет опыта" %}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="image-container">
+                <img src="{% static 'images/WhatsApp Image 2025-11-19 at 19.12.41.jpeg' %}" 
+                     alt='{% t "Студенты в Корее" %}' 
+                     class="main-image">
+                <div class="image-badge success">
+                    <i class="bi bi-check-circle"></i>
+                    <span>{% t "350+ студентов" %}</span>
+                </div>
+                <div class="image-badge award">
+                    <i class="bi bi-award"></i>
+                    <span>{% t "98% поступлений" %}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>{% t "Почему выбирают K-Land Center?" %}</h2>
+            <p>{% t "Мы создаем идеальные условия для вашего успеха в Корее" %}</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h3>{% t "Надежность" %}</h3>
+                <p>{% t "6 лет успешной работы на рынке образовательных услуг с гарантией результата" %}</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+                <h3>{% t "Партнерства" %}</h3>
+                <p>{% t "14+ университетов-партнеров в Южной Корее с прямыми договорами" %}</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+                <h3>{% t "Поддержка 24/7" %}</h3>
+                <p>{% t "Полное сопровождение от подачи заявки до начала обучения в Корее" %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- О центре -->
+<section class="about-preview">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <div class="section-badge">{% t "О нас" %}</div>
+                <h2>{% t "K-Land Center знание-лучшее богатство" %}</h2>
+                <p class="lead">
+                    {% t "С 2018 года мы помогаем кыргызской молодежи получить качественное образование в одной из самых развитых стран мира." %}
+                </p>
+                
+                <div class="achievements">
+                    <div class="achievement">
+                        <i class="bi bi-check-circle"></i>
+                        <span>{% t "Языковая подготовка" %}</span>
+                    </div>
+                    <div class="achievement">
+                        <i class="bi bi-check-circle"></i>
+                        <span>{% t "Поступление в вузы" %}</span>
+                    </div>
+                    <div class="achievement">
+                        <i class="bi bi-check-circle"></i>
+                        <span>{% t "Оформление документов" %}</span>
+                    </div>
+                    <div class="achievement">
+                        <i class="bi bi-check-circle"></i>
+                        <span>{% t "Поддержка в Корее" %}</span>
+                    </div>
+                </div>
+                
+                <a href="{% url 'main:about' %}" class="btn btn-outline">
+                    <i class="bi bi-arrow-right me-2"></i>{% t "История центра" %}
+                </a>
+            </div>
+            
+            <div class="about-image">
+                <div class="image-wrapper">
+                    <img src="{% static 'images/WhatsApp Image 2025-11-19 at 19.12.46.jpeg' %}" 
+                         alt='{% t "K-Land Center" %}'>
+                    <div class="experience-badge">
+                        <div class="years">{% t "8+" %}</div>
+                        <div class="label">{% t "Лет опыта" %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Курсы -->
+<section class="courses-preview">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">{% t "Курсы" %}</div>
+            <h2>{% t "Популярные программы" %}</h2>
+            <p>{% t "Выберите направление для старта в Корее" %}</p>
+        </div>
+        
+        <div class="courses-grid">
+            <div class="course-card korean">
+                <div class="course-header">
+                    <div class="course-badge">{% t "Хит" %}</div>
+                    <div class="course-icon">
+                        <i class="bi bi-chat-square-heart"></i>
+                    </div>
+                    <h3>{% t "Корейский язык" %}</h3>
+                </div>
+                <div class="course-content">
+                    <p>{% t "TOPIK 1–6 уровней с опытными преподавателями. Полное погружение в культуру Кореи." %}</p>
+                    <div class="course-features">
+                        <span>{% t "🎯 TOPIK подготовка" %}</span>
+                        <span>{% t "💬 Носители языка" %}</span>
+                        <span>{% t "📚 4 семестра" %}</span>
+                    </div>
+                </div>
+                <div class="course-footer">
+
+                    <a href="{% url 'main:courses' %}" class="course-btn">{% t "Подробнее" %}</a>
+                </div>
+            </div>
+            
+            <div class="course-card english">
+                <div class="course-header">
+                    <div class="course-badge">{% t "Интенсив" %}</div>
+                    <div class="course-icon">
+                        <i class="bi bi-globe2"></i>
+                    </div>
+                    <h3>{% t "Английский язык" %}</h3>
+                </div>
+                <div class="course-content">
+                    <p>{% t "IELTS/TOEFL для поступления на англоязычные программы в корейских вузах." %}</p>
+                    <div class="course-features">
+                        <span>{% t "🎯 IELTS/TOEFL" %}</span>
+                        <span>{% t "📝 Академический" %}</span>
+                        <span>{% t "🚀 6 месяцев" %}</span>
+                    </div>
+                </div>
+                <div class="course-footer">
+                    <a href="{% url 'main:courses' %}" class="course-btn">{% t "Подробнее" %}</a>
+                </div>
+            </div>
+            
+            <div class="course-card university">
+                <div class="course-header">
+                    <div class="course-badge">{% t "Премиум" %}</div>
+                    <div class="course-icon">
+                        <i class="bi bi-mortarboard"></i>
+                    </div>
+                    <h3>{% t "Поступление в ВУЗ" %}</h3>
+                </div>
+                <div class="course-content">
+                    <p>{% t "Бакалавриат, магистратура и докторантура в 14+ ведущих университетах Кореи." %}</p>
+                    <div class="course-features">
+                        <span>{% t "🎓 15+ вузов" %}</span>
+                        <span>{% t "📄 Документы" %}</span>
+                        <span>{% t "🛂 Виза" %}</span>
+                    </div>
+                </div>
+                <div class="course-footer">
+                    <div class="price">{% t "Индивидуально" %}</div>
+                    <a href="{% url 'main:about' %}" class="course-btn">{% t "Подробнее" %}</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'main:courses' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-eye me-2"></i>{% t "Все программы" %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>{% t "Готовы к переменам?" %}</h2>
+            <p>{% t "Начните свой путь в Корее с профессиональной поддержки" %}</p>
+            <div class="cta-actions">
+                <a href="https://wa.me/996775469111?text=Здравствуйте!%20Хочу%20записаться%20на%20курсы." class="btn btn-primary">
+                    <i class="bi bi-whatsapp me-2"></i>{% t "Бесплатная консультация" %}
+                </a>
+                <a href="tel:+996775469111" class="btn btn-secondary">
+                    <i class="bi bi-telephone me-2"></i>{% t "Заказать звонок" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Hero Section */
+.main-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem 0;
+    min-height: auto;
+    position: relative;
+}
+
+.main-hero .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-content {
+    color: white;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.hero-badge {
+    margin-bottom: 1rem;
+}
+
+.hero-badge span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.title-highlight {
+    color: #fbbf24;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #fbbf24;
+    color: #1f2937;
+}
+
+.btn-primary:hover {
+    background: #f59e0b;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #1f2937;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 500px;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-badge {
+    position: absolute;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.image-badge.success {
+    top: 10px;
+    left: 10px;
+    color: #059669;
+}
+
+.image-badge.award {
+    bottom: 10px;
+    right: 10px;
+    color: #d97706;
+}
+
+/* Features Section */
+.features-section {
+    padding: 3rem 0;
+    background: #f8fafc;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: #6b7280;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* About Section */
+.about-preview {
+    padding: 3rem 0;
+    background: white;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-text {
+    text-align: center;
+}
+
+.section-badge {
+    display: inline-block;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.about-text h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.about-text .lead {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.achievements {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.achievement i {
+    color: #10b981;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+.about-image {
+    order: -1;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.experience-badge .years {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    line-height: 1;
+}
+
+.experience-badge .label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+/* Courses Section */
+.courses-preview {
+    padding: 3rem 0;
+    background: #f8fafc;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.course-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.course-header {
+    padding: 1.5rem 1rem 1rem;
+    position: relative;
+}
+
+.course-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: #fbbf24;
+    color: #1f2937;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.course-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.korean .course-icon { background: #667eea; }
+.english .course-icon { background: #10b981; }
+.university .course-icon { background: #f59e0b; }
+
+.course-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.course-content {
+    padding: 0 1rem;
+}
+
+.course-content p {
+    color: #6b7280;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.course-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.course-features span {
+    color: #374151;
+    font-size: 0.8rem;
+}
+
+.course-footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+}
+
+.price {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.9rem;
+}
+
+.course-btn {
+    background: #667eea;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.course-btn:hover {
+    background: #5a67d8;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 3rem 0;
+    background: #1f2937;
+    color: white;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cta-content p {
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .main-hero {
+        padding: 3rem 0;
+    }
+    
+    .main-hero .container {
+        flex-direction: row;
+        gap: 3rem;
+        text-align: left;
+    }
+    
+    .hero-content {
+        text-align: left;
+        flex: 1;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-actions {
+        justify-content: flex-start;
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .hero-image {
+        flex: 1;
+        max-width: 400px;
+    }
+    
+    .features-section,
+    .about-preview,
+    .courses-preview,
+    .cta-section {
+        padding: 4rem 0;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: none;
+        gap: 2rem;
+    }
+    
+    .about-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    .about-text {
+        text-align: left;
+        flex: 1;
+    }
+    
+    .about-image {
+        order: 0;
+        flex: 1;
+    }
+    
+    .about-text h2 {
+        font-size: 2rem;
+    }
+    
+    .achievements {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .courses-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    
+    .cta-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .features-section,
+    .about-preview,
+    .courses-preview,
+    .cta-section {
+        padding: 5rem 0;
+    }
+    
+    .section-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .feature-card {
+        padding: 2rem;
+    }
+    
+    .about-text h2 {
+        font-size: 2.5rem;
+    }
+    
+    .experience-badge {
+        padding: 1.5rem;
+    }
+    
+    .experience-badge .years {
+        font-size: 2rem;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        padding: 0 15px;
+    }
+}
+</style>
+
+<script>
+// Простая анимация появления элементов
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Анимируем карточки и секции
+    const animateElements = document.querySelectorAll('.feature-card, .course-card, .about-text, .about-image');
+    animateElements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "all 0.6s ease";
+        observer.observe(el);
+    });
+});
+</script>
+{% endblock %}

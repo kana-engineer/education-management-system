@@ -1,0 +1,1193 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Админ-панель
+{% endblock %}
+
+{% block body %}
+<section class="container">
+    <div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="fw-bold mb-4">Админ-панель</h4>
+            <p style="padding-bottom: 20px;" class="text-muted mb-0">Управление пользователями системы</p>
+            
+            <!-- Статистика -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card border-0 bg-primary bg-opacity-10">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white p-2 rounded me-3">
+                                    <i class="bi bi-people fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">{{ users|length }}</h5>
+                                    <span class="text-muted small">Всего пользователей</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card border-0 bg-success bg-opacity-10">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success text-white p-2 rounded me-3">
+                                    <i class="bi bi-mortarboard fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0" id="students-count">{{ students_count }}</h5>
+                                    <span class="text-muted small">Студентов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card border-0 bg-danger bg-opacity-10">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-danger text-white p-2 rounded me-3">
+                                    <i class="bi bi-shield-check fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">{{ admin_count }}</h5>
+                                    <span class="text-muted small">Администраторов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card border-0 bg-warning bg-opacity-10">
+                        <div class="card-body py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-warning text-white p-2 rounded me-3">
+                                    <i class="bi bi-clock fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">{{ new_applications_count }}</h5>
+                                    <span class="text-muted small">Новые заявки</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрое управление -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0 fw-bold">Быстрое управление</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="#applications" class="btn btn-outline-primary" onclick="switchTab('applications-tab')">
+                                    <i class="bi bi-list-check me-2"></i>Заявки на курсы
+                                </a>
+                                <a href="#users" class="btn btn-outline-success" onclick="switchTab('users-tab')">
+                                    <i class="bi bi-people me-2"></i>Пользователи
+                                </a>
+                                <a href="#news" class="btn btn-outline-info" onclick="switchTab('news-tab')">
+                                    <i class="bi bi-newspaper me-2"></i>Управление новостями
+                                </a>
+                                <a href="#korea-admission" class="btn btn-outline-warning" onclick="switchTab('korea-admission-tab')">
+                                    <i class="bi bi-calendar-event me-2"></i>Поступление в Корею
+                                </a>
+                                <a href="#teachers" class="btn btn-outline-secondary" onclick="switchTab('teachers-tab')">
+                                    <i class="bi bi-person-badge me-2"></i>Учителя
+                                </a>
+                                <a href="#students-management" class="btn btn-outline-success" onclick="switchTab('students-management-tab')">
+                                    <i class="bi bi-mortarboard me-2"></i>Управление студентами
+                                </a>
+                                <a href="#messages-tab" class="btn btn-outline-primary" onclick="switchTab('messages-tab-button')">
+                                    <i class="bi bi-envelope me-2"></i>Сообщения
+                                </a>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewsModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить новость
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Табы -->
+            <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="applications-tab" data-bs-toggle="tab" 
+                            data-bs-target="#applications" type="button" role="tab">
+                        <i class="bi bi-list-check me-2"></i>Заявки на курсы
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="users-tab" data-bs-toggle="tab" 
+                            data-bs-target="#users" type="button" role="tab">
+                        <i class="bi bi-people me-2"></i>Пользователи
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="news-tab" data-bs-toggle="tab" 
+                            data-bs-target="#news" type="button" role="tab">
+                        <i class="bi bi-newspaper me-2"></i>Новости
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="korea-admission-tab" data-bs-toggle="tab" 
+                            data-bs-target="#korea-admission" type="button" role="tab">
+                        <i class="bi bi-calendar-event me-2"></i>Поступление в Корею
+                    </button>
+                </li>
+                <!-- ТАБ ДЛЯ УЧИТЕЛЕЙ -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="teachers-tab" data-bs-toggle="tab" 
+                            data-bs-target="#teachers" type="button" role="tab">
+                        <i class="bi bi-person-badge me-2"></i>Учителя
+                    </button>
+                </li>
+                <!-- НОВЫЙ ТАБ ДЛЯ УПРАВЛЕНИЯ СТУДЕНТАМИ -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="students-management-tab" data-bs-toggle="tab" 
+                            data-bs-target="#students-management" type="button" role="tab">
+                        <i class="bi bi-mortarboard me-2"></i>Управление студентами
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab-button" data-bs-toggle="tab" 
+                            data-bs-target="#messages-tab" type="button" role="tab">
+                        <i class="bi bi-envelope me-2"></i>Сообщения
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Контент табов -->
+            <div class="tab-content" id="adminTabsContent">
+                
+                <!-- Таб заявок -->
+               <div class="tab-pane fade show active" id="applications" role="tabpanel">
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0 fw-bold">Заявки на курсы</h5>
+        </div>
+        <div class="card-body p-0">
+            {% if applications %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="border-0 ps-4">Курс</th>
+                            <th class="border-0">Студент</th>
+                            <th class="border-0">Телефон</th>
+                            <th class="border-0">Дата подачи</th>
+                            <th class="border-0">Статус</th>
+                            <th class="border-0 text-end pe-4">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in applications %}
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center">
+                                    {% if app.course_type == 'korean' %}
+                                    <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                        <i class="bi bi-chat-dots text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-medium">Корейский язык</div>
+                                        <small class="text-muted">ID: {{ app.id }}</small>
+                                    </div>
+                                    {% elif app.course_type == 'english' %}
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                                        <i class="bi bi-globe text-success"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-medium">Английский язык</div>
+                                        <small class="text-muted">ID: {{ app.id }}</small>
+                                    </div>
+                                    {% elif app.course_type == 'chinese' %}
+                                    <div class="bg-danger bg-opacity-10 rounded-circle p-2 me-3">
+                                        <i class="bi bi-chat-square-text text-danger"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-medium">Китайский язык</div>
+                                        <small class="text-muted">ID: {{ app.id }}</small>
+                                    </div>
+                                    {% else %}
+                                    <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-3">
+                                        <i class="bi bi-question-circle text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-medium">Другой курс</div>
+                                        <small class="text-muted">ID: {{ app.id }}</small>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-medium">{{ app.applicant_name }}</div>
+                            </td>
+                            <td>
+                                <div class="text-muted">{{ app.applicant_phone }}</div>
+                            </td>
+                            <td>
+                                <div class="text-muted small">
+                                    {{ app.created_at|date:"d.m.Y" }}
+                                </div>
+                            </td>
+                            <td>
+                                {% if app.status == 'new' %}
+                                <span class="badge bg-warning">Новая</span>
+                                {% elif app.status == 'contacted' %}
+                                <span class="badge bg-info">На связи</span>
+                                {% else %}
+                                <span class="badge bg-success">Одобрена</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="d-flex gap-2 justify-content-end">
+                                    {% if app.status != 'contacted' %}
+                                    <form method="POST" action="{% url 'main:update_status' %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="application_id" value="{{ app.id }}">
+                                        <input type="hidden" name="status" value="contacted">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-telephone"></i>
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                    
+                                    {% if app.status != 'approved' %}
+                                    <form method="POST" action="{% url 'main:update_status' %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="application_id" value="{{ app.id }}">
+                                        <input type="hidden" name="status" value="approved">
+                                        <button type="submit" class="btn btn-outline-success btn-sm">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-inbox display-1 text-muted opacity-25 mb-3"></i>
+                <h5 class="text-muted">Заявок пока нет</h5>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+                <!-- Таб пользователей -->
+                <div class="tab-pane fade" id="users" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0 fw-bold">Пользователи системы</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0 ps-4">Пользователь</th>
+                                            <th class="border-0">Email</th>
+                                            <th class="border-0">Роль</th>
+                                            <th class="border-0">Дата регистрации</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr>
+                                            <td class="ps-4">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                                        <i class="bi bi-person text-primary"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-medium">{{ user.name }}</div>
+                                                        <small class="text-muted">ID: {{ user.id }}</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ user.email }}</td>
+                                            <td>
+                                                {% if user.role == 'admin' %}
+                                                <span class="badge bg-danger">Администратор</span>
+                                                {% else %}
+                                                <span class="badge bg-primary">Студент</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="text-muted small">
+                                                    {{ user.created_at|date:"d.m.Y" }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Таб новостей -->
+                <div class="tab-pane fade" id="news" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold">Управление новостями</h5>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addNewsModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить новость
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            {% if news_list %}
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0 ps-4">ID</th>
+                                            <th class="border-0">Заголовок</th>
+                                            <th class="border-0">Дата</th>
+                                            <th class="border-0">Статус</th>
+                                            <th class="border-0 text-end pe-4">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for news in news_list %}
+                                        <tr>
+                                            <td class="ps-4">{{ news.id }}</td>
+                                            <td>
+                                                <div class="fw-medium">{{ news.title|truncatechars:50 }}</div>
+                                            </td>
+                                            <td>
+                                                <div class="text-muted small">
+                                                    {{ news.created_at|date:"d.m.Y" }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% if news.is_published %}
+                                                <span class="badge bg-success">Опубликовано</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary">Черновик</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end pe-4">
+                                                <div class="d-flex gap-2 justify-content-end">
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" 
+                                                            data-bs-toggle="modal" data-bs-target="#editNewsModal{{ news.id }}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <a href="{% url 'main:delete_news' news.id %}" class="btn btn-outline-danger btn-sm"
+                                                        onclick="return confirm('Удалить новость?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="text-center py-5">
+                                <i class="bi bi-newspaper display-1 text-muted opacity-25 mb-3"></i>
+                                <h5 class="text-muted">Новостей пока нет</h5>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addNewsModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить новость
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Таб поступления в Корею -->
+                <div class="tab-pane fade" id="korea-admission" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold">Управление сроками поступления в Корею</h5>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addPeriodModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить период
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            {% if admission_periods %}
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0 ps-4">Период</th>
+                                            <th class="border-0">Подача документов</th>
+                                            <th class="border-0">Начало учебы</th>
+                                            <th class="border-0">Статус</th>
+                                            <th class="border-0 text-end pe-4">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for period in admission_periods %}
+                                        <tr>
+                                            <td class="ps-4">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3">
+                                                        <i class="bi bi-calendar3 text-warning"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-medium">{{ period.name }}</div>
+                                                        <small class="text-muted">ID: {{ period.id }}</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="fw-medium">{{ period.application_start }} - {{ period.application_end }}</div>
+                                            </td>
+                                            <td>
+                                                <div class="text-muted">{{ period.studies_start }}</div>
+                                            </td>
+                                            <td>
+                                                {% if period.is_active %}
+                                                <span class="badge bg-success">Активен</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary">Неактивен</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end pe-4">
+                                                <div class="d-flex gap-2 justify-content-end">
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" 
+                                                            data-bs-toggle="modal" data-bs-target="#editPeriodModal{{ period.id }}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <form method="POST" action="{% url 'main:delete_admission_period' period.id %}" class="d-inline">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                                onclick="return confirm('Удалить период поступления?')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="text-center py-5">
+                                <i class="bi bi-calendar-event display-1 text-muted opacity-25 mb-3"></i>
+                                <h5 class="text-muted">Периодов поступления пока нет</h5>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addPeriodModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить период
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ТАБ ДЛЯ УЧИТЕЛЕЙ -->
+                <div class="tab-pane fade" id="teachers" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold">Управление учителями</h5>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить учителя
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            {% if teachers %}
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0 ps-4">Порядок</th>
+                                            <th class="border-0">Имя</th>
+                                            <th class="border-0">Должность</th>
+                                            <th class="border-0">Теги</th>
+                                            <th class="border-0 text-end pe-4">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for teacher in teachers %}
+                                        <tr>
+                                            <td class="ps-4">{{ teacher.order }}</td>
+                                            <td><strong>{{ teacher.name }}</strong></td>
+                                            <td>{{ teacher.role }}</td>
+                                            <td>
+                                                {% for tag in teacher.get_tags_list %}
+                                                <span class="badge bg-secondary me-1">{{ tag }}</span>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% if teacher.is_founder %}
+                                                <span class="badge bg-success">Да</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary">Нет</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end pe-4">
+                                                <div class="d-flex gap-2 justify-content-end">
+                                                    <!-- Кнопка редактирования -->
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#editTeacherModal"
+                                                            data-id="{{ teacher.id }}"
+                                                            data-name="{{ teacher.name }}"
+                                                            data-role="{{ teacher.role }}"
+                                                            data-tags="{{ teacher.tags }}"
+                                                            data-order="{{ teacher.order }}"
+                                                            data-founder="{{ teacher.is_founder }}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    
+                                                    <!-- Кнопка удаления -->
+                                                    <a href="{% url 'main:delete_teacher' teacher.id %}" 
+                                                       class="btn btn-outline-danger btn-sm"
+                                                       onclick="return confirm('Удалить этого учителя?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="text-center py-5">
+                                <i class="bi bi-person-badge display-1 text-muted opacity-25 mb-3"></i>
+                                <h5 class="text-muted">Учителей пока нет</h5>
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить учителя
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- НОВЫЙ ТАБ ДЛЯ УПРАВЛЕНИЯ СТУДЕНТАМИ -->
+                <div class="tab-pane fade" id="students-management" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold">Управление количеством студентов</h5>
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#manageStudentsCountModal">
+                                        <i class="bi bi-gear me-2"></i>Настроить количество
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card border-0 bg-light">
+                                        <div class="card-body text-center py-5">
+                                            <div class="display-1 text-success mb-3">
+                                                <i class="bi bi-mortarboard"></i>
+                                            </div>
+                                            <h2 class="mb-2" id="tab-students-count">{{ students_count }}</h2>
+                                            <p class="text-muted mb-0">Текущее количество студентов</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <strong>Информация:</strong> Изменение количества студентов не влияет на реальных пользователей в системе. 
+                                    Это статистическое значение для отображения на сайте.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Таб сообщений -->
+                <div style="margin-bottom: 50px;" class="tab-pane fade" id="messages-tab" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0 fw-bold">Сообщения пользователей</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0 ps-4">Имя</th>
+                                            <th class="border-0">Телефон</th>
+                                            <th class="border-0">Сообщение</th>
+                                            <th class="border-0">Дата</th>
+                                            <th class="border-0">Действие</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for msg in message_entry %}
+                                        <tr>
+                                            <td class="ps-4">{{ msg.name }}</td>
+                                            <td>{{ msg.phone }}</td>
+                                            <td>{{ msg.message }}</td>
+                                            <td>{{ msg.created_at|date:"d.m.Y H:i" }}</td>
+                                            <td>
+                                                <form method="POST" action="{% url 'main:delete_message' msg.id %}" 
+                                                    onsubmit="return confirm('Вы уверены, что хотите удалить это сообщение?');">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i> Удалить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">Сообщений нет</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна остаются без изменений -->
+<!-- Модальное окно добавления новости -->
+<div class="modal fade" id="addNewsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить новость</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'main:add_news' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Заголовок</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Текст новости</label>
+                        <textarea name="content" class="form-control" rows="6" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Фото новости</label>
+                        <input type="file" name="photo" class="form-control" accept="image/*">
+                        <div class="form-text">Поддерживаемые форматы: JPG, PNG, GIF (макс. 2MB)</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Добавить новость</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно добавления периода поступления -->
+<div class="modal fade" id="addPeriodModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить период поступления</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{% url 'main:add_admission_period' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Название периода</label>
+                        <input type="text" name="name" class="form-control" placeholder="Весенний семестр 2025" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Начало подачи</label>
+                            <input type="text" name="application_start" class="form-control" placeholder="Сентябрь" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Конец подачи</label>
+                            <input type="text" name="application_end" class="form-control" placeholder="Ноябрь" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Начало учебы</label>
+                        <input type="text" name="studies_start" class="form-control" placeholder="Март" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="is_active" class="form-check-input" id="is_active" checked>
+                        <label class="form-check-label" for="is_active">Активный период</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Добавить период</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно управления количеством студентов -->
+<div class="modal fade" id="manageStudentsCountModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Управление количеством студентов</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{% url 'main:set_students' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="display-1 text-success mb-3">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h4 class="mb-2">Текущее количество студентов</h4>
+                        <h2 class="text-success fw-bold">{{ students_count }}</h2>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Выберите действие:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="action_type" id="set_students" value="set">
+                            <label class="form-check-label" for="set_students">
+                                Установить точное количество
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Количество:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control form-control-lg" 
+                                name="student_count" id="student_count" 
+                                min="0" value="1" required>
+                            <span class="input-group-text">студентов</span>
+                        </div>
+                        <div class="form-text">Введите количество для изменения</div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        После сохранения общее количество будет обновлено
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle me-2"></i>Применить изменения
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно быстрого изменения количества студентов -->
+
+<!-- Модальное окно добавления учителя -->
+<div class="modal fade" id="addTeacherModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить учителя</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{% url 'main:admin_teachers' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Имя учителя *</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Должность *</label>
+                        <input type="text" name="role" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Теги (через запятую)</label>
+                        <input type="text" name="tags" class="form-control" placeholder="TOPIK 6, 5 лет опыта">
+                    </div>
+                    
+                    <!-- ИСПРАВЛЕНО: единое имя name="photo" -->
+                    <div class="mb-3">
+                        <label class="form-label">Фото учителя</label>
+                        <input type="file" name="photo" class="form-control" accept="image/*">
+                        <div class="form-text">Поддерживаемые форматы: JPG, PNG, GIF (макс. 2MB)</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" name="add_teacher" class="btn btn-primary">Добавить учителя</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно редактирования учителя -->
+<div class="modal fade" id="editTeacherModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактировать учителя</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{% url 'main:admin_teachers' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="teacher_id" id="edit_teacher_id">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Имя учителя</label>
+                        <input type="text" name="edit_name" id="edit_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Должность</label>
+                        <input type="text" name="edit_role" id="edit_role" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Теги (через запятую)</label>
+                        <input type="text" name="edit_tags" id="edit_tags" class="form-control">
+                    </div>
+                    
+                    <!-- ИСПРАВЛЕНО: единое имя name="photo" вместо name="edit_photo" -->
+                    <div class="mb-3">
+                        <label class="form-label">Фото учителя</label>
+                        <input type="file" name="photo" class="form-control" accept="image/*">
+                        <div class="form-text">Оставьте пустым, чтобы не изменять текущее фото</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" name="edit_teacher" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна редактирования для каждой новости -->
+{% for news in news_list %}
+<div class="modal fade" id="editNewsModal{{ news.id }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактировать новость</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'main:edit_news' news.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Заголовок</label>
+                        <input type="text" name="title" class="form-control" value="{{ news.title }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Текст новости</label>
+                        <textarea name="content" class="form-control" rows="6" required>{{ news.content }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <!-- ИСПРАВЛЕНО: единое имя name="photo" -->
+                        <label class="form-label">Фото новости</label>
+                        <input type="file" name="photo" class="form-control" accept="image/*">
+                        <div class="form-text">Поддерживаемые форматы: JPG, PNG, GIF (макс. 2MB)</div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="is_published" class="form-check-input" id="publish{{ news.id }}" {% if news.is_published %}checked{% endif %}>
+                        <label class="form-check-label" for="publish{{ news.id }}">Опубликовать</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-warning">Обновить новость</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Модальные окна редактирования для каждого периода -->
+{% for period in admission_periods %}
+<div class="modal fade" id="editPeriodModal{{ period.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактировать период</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{% url 'main:edit_admission_period' period.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Название периода</label>
+                        <input type="text" name="name" class="form-control" value="{{ period.name }}" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Начало подачи</label>
+                            <input type="text" name="application_start" class="form-control" value="{{ period.application_start }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Конец подачи</label>
+                            <input type="text" name="application_end" class="form-control" value="{{ period.application_end }}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Начало учебы</label>
+                        <input type="text" name="studies_start" class="form-control" value="{{ period.studies_start }}" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="is_active" class="form-check-input" id="is_active{{ period.id }}" {% if period.is_active %}checked{% endif %}>
+                        <label class="form-check-label" for="is_active{{ period.id }}">Активный период</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-warning">Обновить период</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<style>
+.nav-tabs .nav-link {
+    font-weight: 500;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    color: #6b7280;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    background: transparent;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.table th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+}
+
+.btn-sm {
+    padding: 0.375rem 0.5rem;
+}
+
+.d-flex.gap-2 {
+    gap: 0.5rem !important;
+}
+
+/* Стиль для кнопок управления студентами */
+#students-count, #tab-students-count {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Стили для модальных окон управления студентами */
+#quick-current-count {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #198754;
+}
+
+#quick-display-count {
+    font-size: 2.5rem;
+    color: #198754;
+}
+</style>
+
+<script>
+function switchTab(tabButtonId) {
+    const button = document.getElementById(tabButtonId);
+    if (button) {
+        const tab = new bootstrap.Tab(button);
+        tab.show();
+    }
+}
+
+// JavaScript для модального окна редактирования учителя
+document.addEventListener('DOMContentLoaded', function() {
+    var editTeacherModal = document.getElementById('editTeacherModal');
+    if (editTeacherModal) {
+        editTeacherModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            
+            document.getElementById('edit_teacher_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-name');
+            document.getElementById('edit_role').value = button.getAttribute('data-role');
+            document.getElementById('edit_tags').value = button.getAttribute('data-tags');
+            document.getElementById('edit_order').value = button.getAttribute('data-order');
+            
+            var isFounder = button.getAttribute('data-founder') === 'True';
+            document.getElementById('edit_is_founder').checked = isFounder;
+        });
+    }
+    
+    // Обновляем быстрое модальное окно при открытии
+    var quickUpdateModal = document.getElementById('quickUpdateStudentsModal');
+    if (quickUpdateModal) {
+        quickUpdateModal.addEventListener('show.bs.modal', function () {
+            const currentCount = document.getElementById('students-count').textContent;
+            document.getElementById('quick-current-count').textContent = currentCount;
+            document.getElementById('quick-display-count').textContent = currentCount;
+            document.getElementById('quick-manual-count').value = currentCount;
+        });
+    }
+});
+
+// Функции для быстрого модального окна
+function quickChangeCount(change) {
+    const currentElement = document.getElementById('quick-display-count');
+    let currentCount = parseInt(currentElement.textContent);
+    let newCount = currentCount + change;
+    
+    // Не позволяем уйти ниже 0
+    if (newCount < 0) newCount = 0;
+    
+    currentElement.textContent = newCount;
+    document.getElementById('quick-manual-count').value = newCount;
+}
+
+function setQuickManualCount() {
+    const manualInput = document.getElementById('quick-manual-count');
+    const manualCount = parseInt(manualInput.value);
+    
+    if (!isNaN(manualCount) && manualCount >= 0) {
+        document.getElementById('quick-display-count').textContent = manualCount;
+        showNotification('Значение установлено', 'info');
+    } else {
+        showNotification('Введите корректное число', 'error');
+    }
+}
+
+function saveQuickStudentsCount() {
+    const newCount = parseInt(document.getElementById('quick-display-count').textContent);
+    const currentCountElement = document.getElementById('students-count');
+    const tabCountElement = document.getElementById('tab-students-count');
+    
+    // Обновляем отображение
+    currentCountElement.textContent = newCount;
+    tabCountElement.textContent = newCount;
+    
+    // Отправляем запрос на сервер
+    fetch('/update_students_count', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+            count: newCount,
+            action: 'set'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Количество студентов обновлено!', 'success');
+            // Закрываем модальное окно
+            var modal = bootstrap.Modal.getInstance(document.getElementById('quickUpdateStudentsModal'));
+            modal.hide();
+            // Обновляем отображение в быстром модальном окне
+            document.getElementById('quick-current-count').textContent = newCount;
+        } else {
+            showNotification('Ошибка при обновлении', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Ошибка соединения', 'error');
+    });
+}
+
+// Функция для быстрых действий в табе
+function quickAction(change) {
+    const currentCountElement = document.getElementById('students-count');
+    const tabCountElement = document.getElementById('tab-students-count');
+    let currentCount = parseInt(currentCountElement.textContent);
+    let newCount = currentCount + change;
+    
+    // Не позволяем уйти ниже 0
+    if (newCount < 0) newCount = 0;
+    
+    // Обновляем отображение
+    currentCountElement.textContent = newCount;
+    tabCountElement.textContent = newCount;
+    
+    // Отправляем запрос на сервер
+    fetch('/update_students_count', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+            count: newCount,
+            action: change > 0 ? 'add' : 'remove',
+            change_amount: Math.abs(change)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification(`Успешно ${change > 0 ? 'добавлено' : 'удалено'} ${Math.abs(change)} студент(ов)`, 'success');
+        } else {
+            // Если ошибка, возвращаем старое значение
+            currentCountElement.textContent = currentCount;
+            tabCountElement.textContent = currentCount;
+            showNotification('Ошибка при обновлении', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        currentCountElement.textContent = currentCount;
+        tabCountElement.textContent = currentCount;
+        showNotification('Ошибка соединения', 'error');
+    });
+}
+
+// Функция для показа уведомлений
+function showNotification(message, type = 'success') {
+    // Создаем уведомление
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Автоматически удаляем через 3 секунды
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 3000);
+}
+</script>
+</section>
+{% endblock %}

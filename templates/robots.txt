@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login/
+Disallow: /sign-up/
+Disallow: /set_language/
+
+Sitemap: https://k-land.center/sitemap.xml

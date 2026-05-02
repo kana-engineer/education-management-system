@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static i18n_extra %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block body %}
+<div class="auth-container">
+    <div class="auth-header">
+        <div class="d-flex align-items-center justify-content-center mb-3">
+            <img style="width: 100px;" src="{% static 'images/Remove-bg.ai_1764294687291.png' %}" alt="">
+        </div>
+        <h6 class="mb-0 text-muted">{% t "Вход в аккаунт" %}</h6>
+    </div>
+    
+    <div class="auth-body">
+        <form method="post" action="{% url 'main:login' %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label small fw-medium" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="text-danger small mt-1">
+                        {% for error in form.email.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label small fw-medium" for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="text-danger small mt-1">
+                        {% for error in form.password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn-auth">{% t "Войти" %}</button>
+            
+            <div class="divider">
+                {% t "ИЛИ" %}
+            </div>
+            
+            <div class="text-center">
+                <span class="small text-muted">{% t "Нет аккаунта?" %} </span>
+                <a href="{% url 'main:sign_up' %}" class="auth-link small fw-medium">{% t "Зарегистрируйтесь" %}</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
